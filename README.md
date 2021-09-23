@@ -28,6 +28,7 @@ White island RNA-seq
 |all_species_raw_rename_matrix.xls|raw reads number matrix of all inds of four spe using new name, which will be used in all of the following analysis|
 |coldata_rename_trait.txt|the information used in DEG detection|
 |coldata_rename_trait_recode.txt|all sample information used in WCGNA analysis|
+|White_island.TPM.TMM.sqrt.rename.matrix|normalized reads nb matrix for WGCNA and EVE|
 ***
 coldata_rename_trait_recode.txt: sample information were recorded into number  
 |**TRAIT**|Orignial|**Recode number**|
