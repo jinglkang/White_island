@@ -20,3 +20,11 @@ mpca --matrix Blenny_raw_rename_matrix.xls \
 --label \
 --prefix Blenny_all_gene
 ```
+2. pca based on top 1000 variance genes (DESeq2)  
+```bash
+mpca_rna --matrix Blenny_raw_rename_matrix.xls \
+--samples coldata_blenny.txt \
+--column Site_2 \
+--title Blenny \
+--prefix Blenny_top1000
+```
