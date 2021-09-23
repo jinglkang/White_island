@@ -51,7 +51,7 @@ coldata_rename_trait_recode.txt: sample information were recorded into number
 </td></tr> </table>
 
 <table>
-<tr><th>Site1</th><th>Site2</th><th>Site3</th></tr>
+<tr><th>Site1</th><th>Site2</th><th>Site3</th><th>Species</th></tr>
 <tr><td>
 
 |**TRAIT**|Orignial|**Recode number**|
@@ -76,14 +76,16 @@ coldata_rename_trait_recode.txt: sample information were recorded into number
 |Site_3|Vn|3|
 |Site_3|Vs|1| 
 
-</td></tr> </table>
+</td><td>
 
-
-***
 |**TRAIT**|Orignial|**Recode number**|
 |:---:|:---:|:---:|
 |Species|Blenny|4|
 |Species|Blue_eyed|3|
 |Species|Common|1|
-|Species|Yaldwyn|2|
+|Species|Yaldwyn|2| 
+</td></tr> </table>
+
+
 ***
+
