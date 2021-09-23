@@ -10,7 +10,7 @@ less coldata_rename_trait.txt|perl -alne 'print if /^\s+/ || /^Blenny/' >coldata
 extract_reads_nb --matrix all_species_raw_rename_matrix.xls --samples coldata_blenny.txt > Blenny_raw_rename_matrix.xls
 mv coldata_blenny.txt Blenny_raw_rename_matrix.xls Blenny/
 ```
-1. pca based on all genes (cd Blenny) 
+1. pca based on all genes (cd Blenny)  
 Result: Blenny_all_gene.pdf
 ```bash
 mpca --matrix Blenny_raw_rename_matrix.xls \
@@ -20,7 +20,8 @@ mpca --matrix Blenny_raw_rename_matrix.xls \
 --label \
 --prefix Blenny_all_gene
 ```
-2. pca based on top 1000 variance genes (DESeq2)  
+2. pca based on top 1000 variance genes (DESeq2)   
+Result: Blenny_top1000.pdf   
 ```bash
 mpca_rna --matrix Blenny_raw_rename_matrix.xls \
 --samples coldata_blenny.txt \
