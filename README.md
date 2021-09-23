@@ -1,26 +1,17 @@
 White island RNA-seq
 --------------------
 ## Fish species
-### Common triplefin: *Forsterygion lapillum*  
-<img src="https://images.reeflifesurvey.com/0/species_96_57467a68baab7.w1300.h866.jpg" width="348" /> 
+Common triplefin: *Forsterygion lapillum*             |  Yaldwyn's triplefin: *Notoclinops yaldwyni*
+:-------------------------:|:-------------------------:
+<img src="https://images.reeflifesurvey.com/0/species_96_57467a68baab7.w1300.h866.jpg" width="348" />  |  <img src="http://www.ryanphotographic.com/images/JPEGS/Notoclinops%20yaldwyni%20Yaldwyn's%20triplefin,%20Poor%20Knights,%20New%20Zealand%20IMG_9169.jpg" width="348">
 
 
-*** 
-### Yaldwyn's triplefin: *Notoclinops yaldwyni*  
-<img src="http://www.ryanphotographic.com/images/JPEGS/Notoclinops%20yaldwyni%20Yaldwyn's%20triplefin,%20Poor%20Knights,%20New%20Zealand%20IMG_9169.jpg" width="348"> 
+Yaldwyn's triplefin: *Notoclinops yaldwyni*             |  Blue-eyed triplefin: *Notoclinops segmentatus* 
+:-------------------------:|:-------------------------:
+<img src="http://www.ryanphotographic.com/images/JPEGS/Notoclinops%20yaldwyni%20Yaldwyn's%20triplefin,%20Poor%20Knights,%20New%20Zealand%20IMG_9169.jpg" width="348">  |  <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Notoclinops_segmentatus_%28Blue-eyed_triplefin%29.jpg" width="348">
 
 
-***
-### Blue-eyed triplefin: *Notoclinops segmentatus*  
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Notoclinops_segmentatus_%28Blue-eyed_triplefin%29.jpg" width="348">
-
-
-***
-### Crested blenny: *Parablennius laticlavius*  
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Parablennius_laticlavius_%28Crested_blenny%29.jpg" width="348">
-
-
-## FILES description
+## Files description
 |**File Name**|**File Description**|
 |:---:|:---:|
 |rename.txt|the first col is original sample name, which were changed to a new name in the second col|
@@ -31,41 +22,63 @@ White island RNA-seq
 |White_island.TPM.TMM.sqrt.rename.matrix|normalized reads nb matrix for WGCNA and EVE|
 ***
 coldata_rename_trait_recode.txt: sample information were recorded into number  
+<table>
+<tr><th>Date</th><th>Gender</th><th>Sea condition</th></tr>
+<tr><td>
+
 |**TRAIT**|Orignial|**Recode number**|
 |:---:|:---:|:---:|
 |Date|2019/1/11|1|
 |Date|2019/1/12|2|
 |Date|2019/1/14|3|
 |Date|2019/1/15|4|
-***
+
+</td><td>
+
 |**TRAIT**|Orignial|**Recode number**|
 |:---:|:---:|:---:|
 |Gender|Female|2|
 |Gender|Male|1|
-***
+
+</td><td>
+
 |**TRAIT**|Orignial|**Recode number**|
 |:---:|:---:|:---:|
 |Sea_condition|big_swell|2|
 |Sea_condition|calm_sea|1|
-|Sea_condition|medium_swell|3|
-***
+|Sea_condition|medium_swell|3| 
+
+</td></tr> </table>
+
+<table>
+<tr><th>Site1</th><th>Site2</th><th>Site3</th></tr>
+<tr><td>
+
 |**TRAIT**|Orignial|**Recode number**|
 |:---:|:---:|:---:|
 |Site_1|Cn|4|
 |Site_1|Cs|2|
 |Site_1|Vn|3|
 |Site_1|Vs|1|
-***
+
+</td><td>
+
 |**TRAIT**|Orignial|**Recode number**|
 |:---:|:---:|:---:|
 |Site_2|Control|2|
 |Site_2|Vent|1|
-***
+
+</td><td>
+
 |**TRAIT**|Orignial|**Recode number**|
 |:---:|:---:|:---:|
 |Site_3|Control|2|
 |Site_3|Vn|3|
-|Site_3|Vs|1|
+|Site_3|Vs|1| 
+
+</td></tr> </table>
+
+
 ***
 |**TRAIT**|Orignial|**Recode number**|
 |:---:|:---:|:---:|
