@@ -75,5 +75,7 @@ remove the outlier from the information and matrix of Blenny
 coldata_blenny_remove_outlier.txt (remove Blenny_Vn_3)  
 ```bash
 extract_reads_nb --matrix Blenny_raw_rename_matrix.xls --samples coldata_blenny_remove_outlier.txt >Blenny_raw_rename_matrix_remove_outlier.xls
+DESeq --matrix Blenny_raw_rename_matrix_remove_outlier.xls --samples coldata_blenny_remove_outlier.txt --column Site_2 --prefix Blenny
 ```
+Results files: Blenny_Control_Vent.DEGs.txt; Blenny_Control_Vent.csv (19 DEGs)  
 
