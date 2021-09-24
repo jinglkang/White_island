@@ -29,3 +29,34 @@ mpca_rna --matrix Blenny_raw_rename_matrix.xls \
 --title Blenny \
 --prefix Blenny_top1000
 ```
+3. WCGNA (cd Blenny) 
+```bash
+extract_reads_nb --matrix ../White_island.TPM.TMM.sqrt.rename.matrix --samples coldata_blenny.txt >Blenny_normalized_matrix.xls
+```
+```R
+setwd("~/Documents/2021/White_island/reads_number_matrix/Blenny")
+library(WGCNA)
+options(stringsAsFactors = FALSE)
+# read expression data
+####################################################
+white_island = read.table("Blenny_raw_rename_matrix.xls", header = T, row.names = 1)
+# transposed the expression data for the hclust
+datExpr0=t(white_island)
+# remove the bad genes and bad smaples
+gsg = goodSamplesGenes(datExpr0, verbose = 3)
+gsg$allOK
+if (!gsg$allOK){
+  # Optionally, print the gene and sample names that were removed:
+  if (sum(!gsg$goodGenes)>0)
+    printFlush(paste("Removing genes:", paste(names(datExpr0)[!gsg$goodGenes], collapse = ", ")));
+  if (sum(!gsg$goodSamples)>0)
+    printFlush(paste("Removing samples:", paste(rownames(datExpr0)[!gsg$goodSamples], collapse = ", ")));
+  # Remove the offending genes and samples from the data:
+  datExpr0 = datExpr0[gsg$goodSamples, gsg$goodGenes]
+}
+sampleTree = hclust(dist(datExpr0), method = "average")
+# plot the dendrogram
+plot(sampleTree, main = "Sample clustering to detect outliers", sub="", xlab="", cex.lab = 1.5,
+     cex.axis = 1.5, cex.main = 2)
+```
+Result: Blenny_wgcna_outlier.pdf (outlier: Blenny_Vn_3).
