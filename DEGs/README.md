@@ -20,6 +20,7 @@ mpca --matrix Blenny_raw_rename_matrix.xls \
 --label \
 --prefix Blenny_all_gene
 ```
+***
 2. pca based on top 1000 variance genes (DESeq2)   
 Result: Blenny_top1000.pdf   
 ```bash
@@ -29,6 +30,7 @@ mpca_rna --matrix Blenny_raw_rename_matrix.xls \
 --title Blenny \
 --prefix Blenny_top1000
 ```
+***
 3. WCGNA (cd Blenny) 
 ```bash
 extract_reads_nb --matrix ../White_island.TPM.TMM.sqrt.rename.matrix --samples coldata_blenny.txt >Blenny_normalized_matrix.xls
@@ -60,3 +62,10 @@ plot(sampleTree, main = "Sample clustering to detect outliers", sub="", xlab="",
      cex.axis = 1.5, cex.main = 2)
 ```
 Result: Blenny_wgcna_outlier.pdf (outlier: Blenny_Vn_3).
+***
+4. Hclust 
+```bash
+mhclust --matrix Blenny_raw_rename_matrix.xls --samples coldata_blenny.txt --column Site_2 --title Blenny --prefix Blenny_hclust
+```
+Result: Blenny_hclust.pdf (outlier: Blenny_Vn_3).
+
