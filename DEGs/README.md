@@ -1,16 +1,16 @@
 DEGs detections between Control and Vent
 ----------------------------------------
 working directory: ~/Documents/2021/White_island/reads_number_matrix 
-### Detect the Outliers in each species
+# Detect the Outliers in each species
 ***
-#### Blenny
+## Blenny
 Get the infor and raw read nb of all of the Blenny inds   
 ```bash
 less coldata_rename_trait.txt|perl -alne 'print if /^\s+/ || /^Blenny/' >coldata_blenny.txt
 extract_reads_nb --matrix all_species_raw_rename_matrix.xls --samples coldata_blenny.txt > Blenny_raw_rename_matrix.xls
 mv coldata_blenny.txt Blenny_raw_rename_matrix.xls Blenny/
 ```
-1. pca based on all genes (cd Blenny)  
+### 1. pca based on all genes (cd Blenny)  
 Result: Blenny_all_gene.pdf
 ```bash
 mpca --matrix Blenny_raw_rename_matrix.xls \
@@ -21,7 +21,7 @@ mpca --matrix Blenny_raw_rename_matrix.xls \
 --prefix Blenny_all_gene
 ```
 ***
-2. pca based on top 1000 variance genes (DESeq2)   
+### 2. pca based on top 1000 variance genes (DESeq2)   
 Result: Blenny_top1000.pdf   
 ```bash
 mpca_rna --matrix Blenny_raw_rename_matrix.xls \
@@ -31,7 +31,7 @@ mpca_rna --matrix Blenny_raw_rename_matrix.xls \
 --prefix Blenny_top1000
 ```
 ***
-3. WCGNA (cd Blenny) 
+### 3. WCGNA (cd Blenny) 
 ```bash
 extract_reads_nb --matrix ../White_island.TPM.TMM.sqrt.rename.matrix --samples coldata_blenny.txt >Blenny_normalized_matrix.xls
 ```
@@ -63,9 +63,17 @@ plot(sampleTree, main = "Sample clustering to detect outliers", sub="", xlab="",
 ```
 Result: Blenny_wgcna_outlier.pdf (outlier: Blenny_Vn_3).
 ***
-4. Hclust 
+### 4. Hclust 
 ```bash
 mhclust --matrix Blenny_raw_rename_matrix.xls --samples coldata_blenny.txt --column Site_2 --title Blenny --prefix Blenny_hclust
 ```
 Result: Blenny_hclust.pdf (outlier: Blenny_Vn_3).
+***
+# DEGs detection
+## Blenny
+remove the outlier from the information and matrix of Blenny  
+coldata_blenny_remove_outlier.txt (remove Blenny_Vn_3)  
+```bash
+extract_reads_nb --matrix Blenny_raw_rename_matrix.xls --samples coldata_blenny_remove_outlier.txt >Blenny_raw_rename_matrix_remove_outlier.xls
+```
 
