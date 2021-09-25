@@ -84,7 +84,8 @@ Results files: Blenny_Control_Vent.DEGs.txt; Blenny_Control_Vent.DEGs.ano.txt; B
 Result: Blue_eyed_wgcna_outlier.pdf; Blue_eyed_hclust.pdf.   
 Outliers: Blue_eyed_Cs_3; Blue_eyed_Vn_2.
 ### DEGs detection
-remove Blue_eyed_Cs_3 and Blue_eyed_Vn_2 (information table: coldata_blue_eyed_remove_outlier.txt)  
+remove Blue_eyed_Cs_3 and Blue_eyed_Vn_2 (information table: coldata_Blue_eyed_remove_outlier.txt)  
+Results: Blue_eyed_Control_Vent.DEGs.txt, Blue_eyed_Control_Vent.DEGs.ano.txt (68 DEGs);   
 
 
 
