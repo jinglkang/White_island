@@ -79,4 +79,12 @@ DESeq --matrix Blenny_raw_rename_matrix_remove_outlier.xls --samples coldata_ble
 extract_anno --genes Blenny_Control_Vent.DEGs.txt --anno ../unprot_name_description_orthgroup.txt --col 1 >Blenny_Control_Vent.DEGs.ano.txt
 ```
 Results files: Blenny_Control_Vent.DEGs.txt; Blenny_Control_Vent.DEGs.ano.txt; Blenny_Control_Vent.csv (19 DEGs)  
+***
+## Blue_eyed
+Result: Blue_eyed_wgcna_outlier.pdf; Blue_eyed_hclust.pdf.   
+Outliers: Blue_eyed_Cs_3; Blue_eyed_Vn_2.
+### DEGs detection
+remove Blue_eyed_Cs_3 and Blue_eyed_Vn_2 (information table: coldata_blue_eyed_remove_outlier.txt)  
+
+
 
