@@ -45,6 +45,14 @@ extract_reads_nb --matrix White_island.TPM.TMM.sqrt.rename.matrix \
 >White_island.TPM.TMM.sqrt.rename.filtered.matrix
 ```
 Result: White_island.TPM.TMM.sqrt.rename.filtered.matrix (will used in the EVE and WCGNA analysis)  
+***
+## Prepare 3_sampleExpr.dat: ind nb per species  
+|**Species**|**Ind nb**|
+|:---:|:---:|
+|Blenny|17|
+|Common|20|
+|Yaldwyn|20|
+|Blue_eyed|18|
 
 
 
