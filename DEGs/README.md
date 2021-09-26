@@ -91,7 +91,7 @@ Results: Blue_eyed_Control_Vent.DEGs.txt, Blue_eyed_Control_Vent.DEGs.ano.txt (6
 Results: Yaldwyn_raw_rename_matrix.xls; coldata_Yaldwyn.txt; Yaldwyn_wgcna_outlier.pdf; Yaldwyn_hclust.pdf;  
 Yaldwyn_Control_Vent.csv; Yaldwyn_Control_Vent.DEGs.txt; Yaldwyn_Control_Vent.DEGs.ano.txt (59 DEGs);
 ***
-## Common  
+## Common (no outlier) 
 Results: Common__wgcna_outlier.pdf; Common_hclust.pdf (no outlier)  
 Common_Control_Vent.csv; Common_Control_Vent.DEGs.txt; Common_Control_Vent.DEGs.ano.txt (4 DEGs)  
 ***
