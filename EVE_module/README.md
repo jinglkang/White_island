@@ -2,7 +2,7 @@ Detect the divergent and plastic gene
 -------------------------------------
 # Used the species tree from orthofinder
 /media/HDD/white_island/orthologue/input_pep/orthofinder_input/OrthoFinder/Results_Mar29/Species_Tree/SpeciesTree_rooted.txt  
-working directory: /media/HDD/white_island/EVE_module  
+working dir: /media/HDD/white_island/EVE_module  
 ```bash
 cp /media/HDD/white_island/orthologue/input_pep/orthofinder_input/OrthoFinder/Results_Mar29/Species_Tree/SpeciesTree_rooted.txt ./
 cp SpeciesTree_rooted.txt 1_Tree.newick
@@ -17,3 +17,33 @@ cp SpeciesTree_rooted.txt 1_Tree.newick
 |Common|2|
 |Yaldwyn|3|
 |Blue_eyed|4|
+***
+# Prepare the expression data
+all_species_raw_rename_matrix.xls: raw reads number matrix  
+## all ind should not be less than 1 mapped read, mean reads nb should be more than 10
+working dir: ~/Documents/2021/White_island/reads_number_matrix  
+```bash
+less all_species_raw_rename_matrix.xls|perl -alne 'print if /^\s+/; next if  /^\s+/;my $sum;for (my $i=1;$i < @F; $i++){if ($F[$i]==0){$sum=0;last};$sum+=$F[$i]};$mean=$sum/(@F-1);print "$_" unless $mean<=10' > all_species_raw_rename_matrix_filtered.xls
+```
+Result file: all_species_raw_rename_matrix_filtered.xls (15,908 genes) 
+***
+## keep these genes (filtered_genes.txt)
+```bash
+less all_species_raw_rename_matrix_filtered.xls|perl -alne 'next if /^\s+/;print $F[0]' >filtered_genes.txt
+```
+***
+## keep inds (remove outliers: Blenny_Vn_3, Blue_eyed_Cs_3, Blue_eyed_Vn_2)
+Result file: coldata_rename_trait_recode_remove_outlier.txt  
+***
+## Prepare normalized expression data based on filtered_genes.txt and coldata_rename_trait_recode_remove_outlier.txt  
+```bash
+extract_reads_nb --matrix White_island.TPM.TMM.sqrt.rename.matrix \
+--genes filtered_genes.txt \
+--samples coldata_rename_trait_recode_remove_outlier.txt \
+>White_island.TPM.TMM.sqrt.rename.filtered.matrix
+```
+Result: White_island.TPM.TMM.sqrt.rename.filtered.matrix (will used in the EVE and WCGNA analysis)  
+
+
+
+
