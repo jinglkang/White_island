@@ -61,6 +61,12 @@ Result: White_island.TPM.TMM.sqrt.rename.filtered.matrix (will used in the EVE a
 OG0038649	4.213	2.936	2.707	2.080	3.054	3.879	3.778	3.501	3.315
 ```
 ***
-
+# RUN eve module to detect expression shif in each species
+```bash
+nohup ~/software/EVE_release/EVEmodel -O -o 1 -n 15908 -t 1_Tree.newick -i 2_Nindivs.indiv -d 3_sampleExpr_exclu_mid.dat -f _Blenny -v 50 > Blenny_eve.process.txt 2>&1 & 
+nohup ~/software/EVE_release/EVEmodel -O -o 2 -n 15908 -t 1_Tree.newick -i 2_Nindivs.indiv -d 3_sampleExpr_exclu_mid.dat -f _Common -v 50 > Common_eve.process.txt 2>&1 &
+nohup ~/software/EVE_release/EVEmodel -O -o 3 -n 15908 -t 1_Tree.newick -i 2_Nindivs.indiv -d 3_sampleExpr_exclu_mid.dat -f _Yaldwyn -v 50 > Yaldwyn_eve.process.txt 2>&1 &
+nohup ~/software/EVE_release/EVEmodel -O -o 4 -n 15908 -t 1_Tree.newick -i 2_Nindivs.indiv -d 3_sampleExpr_exclu_mid.dat -f _Blue_eyed -v 50 > Blue_eve.process.txt 2>&1 &
+```
 
 
