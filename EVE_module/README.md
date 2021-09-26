@@ -33,6 +33,8 @@ less all_species_raw_rename_matrix_filtered.xls|perl -alne 'next if /^\s+/;print
 ```
 ***
 ## keep inds (remove outliers: Blenny_Vn_3, Blue_eyed_Cs_3, Blue_eyed_Vn_2)
+individuals should be ranked acoording to species
+(1: Blenny; 2: Common; 3: Yaldwyn; 4: Blue_eyed)  
 Result file: coldata_rename_trait_recode_remove_outlier.txt  
 ***
 ## Prepare normalized expression data based on filtered_genes.txt and coldata_rename_trait_recode_remove_outlier.txt  
