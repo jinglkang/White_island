@@ -53,6 +53,12 @@ Result: White_island.TPM.TMM.sqrt.rename.filtered.matrix (will used in the EVE a
 |Common|20|
 |Yaldwyn|20|
 |Blue_eyed|18|
+2_Nindivs.indiv: 17 20 20 18  
+### head -n 2 3_sampleExpr.dat
+```bash
+15908
+OG0038649	4.213	2.936	2.707	2.080	3.054	3.879	3.778	3.501	3.315
+```
 
 
 
