@@ -25,3 +25,4 @@ scp coldata_rename_trait_recode_remove_outlier_wgcna.txt White_island.TPM.TMM.sq
 
 ***
 ## Blenny
+Get the matrix of normalized reads nb and trait data  
