@@ -1,0 +1,42 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+my %col;
+open COL, "dynamicColors.csv" or die "can not open dynamicColors.csv\n";
+while (<COL>) {
+        chomp;
+        s/"//g;
+        next if /^\s+/;
+        my @a=split /\,/;
+        my $name="ME"."$a[1]";
+        $col{$name}=$a[-1];
+}
+
+open FIL, "textMatrix_1.csv" or die "can not open textMatrix_1.csv\n";
+while (<FIL>) {
+        chomp;
+        s/"//g;
+        my @a=split /\,/;
+        if (/Salinity/) {
+                my $info;
+                for (my $i = 0; $i < @a; $i++) {
+                        $info.=$a[$i]."\t";
+                }
+                $info.="Gene_nb";
+                print "$info\n";
+        } else {
+                my $info=$a[0]."\t";
+                for (my $i = 1; $i < @a; $i++) {
+                        my $c=$a[$i];
+                        $a[$i]=~s/\(//;
+                        $a[$i]=~s/\)//;
+                        my @b=split /\s+/, $a[$i];
+                        my $p=$b[-1];
+                        my $value;
+                        ($p<=0.05)?($value=$c):($value="");
+                        $info.=$value."\t";
+                }
+                print "$info$col{$a[0]}\n" if $info=~/\(/;
+        }
+}
