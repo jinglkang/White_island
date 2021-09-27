@@ -24,5 +24,23 @@ scp coldata_rename_trait_recode_remove_outlier_wgcna.txt White_island.TPM.TMM.sq
 ```
 
 ***
-## Blenny
-Get the matrix of normalized reads nb and trait data  
+## Blenny  
+working dir: /media/HDD/white_island/wgcna/Blenny  
+The matrix of normalized reads nb and trait data: Blenny_matrix_wgcna.xls; coldata_Blenny_wgcna.txt.  
+### Run wgcna_no_merge.R
+**Result file**:  
+|**File Name**|**File Description**|
+|:---:|:---:|
+|dynamicColors.csv|gene nb in each color modules|
+|textMatrix_1.csv|the correlation bettwen trait and module|
+### Check the sig. modules per trait
+```bash
+sig_module >sig_module.txt
+```
+### Save the correlation info. between trait and module per gene
+out the code and run the code in R console
+```bash
+code_trait_gene_cor --traits pH Salinity Length
+```
+**Result**: geneInfo_Length.csv; geneInfo_pH.csv; geneInfo_Salinity.csv.  
+
