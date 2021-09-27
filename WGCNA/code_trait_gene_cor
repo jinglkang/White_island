@@ -1,0 +1,67 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Getopt::Long 'HelpMessage';
+
+my $usage=<<_EOH_;;
+------------------------------------------------------------------------------------------
+This script is used to produce the code to output the correlation between genes and traits
+if you merged modules, pls use '--merge'
+
+Usage: 
+code_trait_gene_cor --merge --traits pH Salinity Length
+code_trait_gene_cor --traits pH Salinity Length
+
+Input files:
+
+1. --traits pH Salinity Length
+
+
+											Kang 2021-09-24
+------------------------------------------------------------------------------------------
+_EOH_
+;
+
+GetOptions(
+	'traits:s{1,}', \my @traits,	# the name of trait
+	'merge', \my $merge,	# whether merged the module before output
+	'help', \ my $help
+	);
+
+if ($help || (! @traits)) {
+	die $usage; # all of these options are mandatory requirements
+}
+
+foreach my $trait (@traits) {
+        &R_cmd($trait);
+        print "\n\n";
+}
+
+sub R_cmd {
+        my ($trait)=@_;
+        my $modCol;
+        $merge?($modCol="moduleColors"):($modCol="dynamicColors");
+        print "$trait = as.data.frame(datTraits\$$trait)\n";
+        print "names($trait) = \"$trait\"\n";
+        print "modNames = substring(names(MEs), 3)\n";
+        print "geneModuleMembership = as.data.frame(cor(datExpr, MEs, use = \"p\"))\n";
+        print "MMPvalue = as.data.frame(corPvalueStudent(as.matrix(geneModuleMembership), nSamples))\n";
+        print "names(geneModuleMembership) = paste(\"MM\", modNames, sep=\"\")\n";
+        print "names(MMPvalue) = paste(\"p.MM\", modNames, sep=\"\")\n";
+        print "geneTraitSignificance = as.data.frame(cor(datExpr, $trait, use = \"p\"))\n";
+        print "GSPvalue = as.data.frame(corPvalueStudent(as.matrix(geneTraitSignificance), nSamples))\n";
+        print "names(geneTraitSignificance) = paste(\"GS.\", names($trait), sep=\"\")\n";
+        print "geneInfo0 = data.frame(moduleColor=$modCol, geneTraitSignificance, GSPvalue)\n";
+        print "modOrder = order(-abs(cor(MEs, $trait, use = \"p\")))\n";
+        print "for (mod in 1:ncol(geneModuleMembership))\n";
+        print "{\n";
+        print "\t\toldNames = names(geneInfo0)\n";
+        print "\t\tgeneInfo0 = data.frame(geneInfo0, geneModuleMembership[, modOrder[mod]],\n";
+    print "\t\tMMPvalue[, modOrder[mod]]);\n";
+        print "\t\tnames(geneInfo0) = c(oldNames, paste(\"MM.\", modNames[modOrder[mod]], sep=\"\"),\n";
+    print "\t\tpaste(\"p.MM.\", modNames[modOrder[mod]], sep=\"\"))\n";
+    print "}\n";
+    print "geneOrder = order(geneInfo0\$moduleColor, -abs(geneInfo0\$GS.$trait))\n";
+    print "geneInfo = geneInfo0[geneOrder, ]\n";
+    print "write.csv(geneInfo, file=\"geneInfo_$trait.csv\")\n";
+}
