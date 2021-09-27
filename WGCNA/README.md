@@ -43,4 +43,3 @@ out the code and run the code in R console
 code_trait_gene_cor --traits pH Salinity Length
 ```
 **Result**: geneInfo_Length.csv; geneInfo_pH.csv; geneInfo_Salinity.csv.  
-
