@@ -78,6 +78,9 @@ working dir: /media/HDD/white_island/wgcna/Common
 |Salinity|module_nb(6)|gene_nb(102)|
 ***
 ## Yaldwyn
-working dir: /media/HDD/white_island/wgcna/Yaldwyn   
-
-
+working dir: /media/HDD/white_island/wgcna/Yaldwyn    
+no sig. gene in any sig. module related to pH  
+|**Trait**|**module nb**|**gene nb**|
+|:---:|:---:|:---:|
+|Length|module_nb(44)|gene_nb(630)|
+|Salinity|module_nb(5)|gene_nb(183)|
