@@ -168,23 +168,4 @@ verboseScatterplot(abs(geneModuleMembership[moduleGenes, column]),
                    ylab = "Gene significance for Species",
                    main = paste("Module membership vs. gene significance\n"),
                    cex.main = 1.2, cex.lab = 1.2, cex.axis = 1.2, col = module)
-
-# summary output of module analysis results
-geneInfo0 = data.frame(moduleColor=moduleColors, geneTraitSignificance, GSPvalue)
-nrow(geneInfo0)
-# Order modules by their significance for "Species"
-modOrder = order(-abs(cor(MEs, Species, use = "p")));
-# Add module membership information in the chosen order
-for (mod in 1:ncol(geneModuleMembership))
-{
-  oldNames = names(geneInfo0)
-  geneInfo0 = data.frame(geneInfo0, geneModuleMembership[, modOrder[mod]],
-                         MMPvalue[, modOrder[mod]]);
-  names(geneInfo0) = c(oldNames, paste("MM.", modNames[modOrder[mod]], sep=""),
-                       paste("p.MM.", modNames[modOrder[mod]], sep=""))
-}
-# Order the genes in the gene
-geneOrder = order(geneInfo0$moduleColor, -abs(geneInfo0$GS.Species));
-geneInfo = geneInfo0[geneOrder, ]
-write.csv(geneInfo, file="geneInfo_species.csv")
 ###################################################################
