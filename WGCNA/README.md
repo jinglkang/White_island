@@ -70,3 +70,8 @@ prep_exp_wgcna_plot --wgcna Blenny_matrix_wgcna.xls --trait geneInfo_pH_sig.txt 
 ```
 ***
 ## Common
+|**Trait**|**module nb**|**gene nb**|
+|:---:|:---:|:---:|
+|pH|module_nb(20)|gene_nb(646)|
+|Length|module_nb(27)|gene_nb(1038)|
+|Salinity|module_nb(6)|gene_nb(102)|
