@@ -56,4 +56,15 @@ output files: geneInfo_Length_sig.txt, geneInfo_pH_sig.txt, geneInfo_Salinity_si
 |Length|module_nb(43)|gene_nb(948)|
 |Salinity|module_nb(2)|gene_nb(24)|
 ### transform the expression data to ratio, and plot these gene expression data according to positive or negative correlated
-
+```bash
+less coldata_Blenny_wgcna.txt|perl -alne 'if (/^\s+/){print}else{($F[1]==1)?($F[1]="vent"):($F[1]="control");print join("\t",@F)}' >coldata_Blenny.txt
+less geneInfo_pH_sig.txt|perl -alne 'next if /^\s+/;print $F[0] if $F[2]>0' >geneInfo_pH_sig_pos.txt
+less geneInfo_pH_sig.txt|perl -alne 'next if /^\s+/;print $F[0] if $F[2]<0' >geneInfo_pH_sig_neg.txt
+extract_gene_expression_plot --matrix expression_ratio.txt --sample coldata_Blenny.txt --gene geneInfo_pH_sig_pos.txt --col1 Site --order1 control vent >pH_sig_pos.plot.txt
+extract_gene_expression_plot --matrix expression_ratio.txt --sample coldata_Blenny.txt --gene geneInfo_pH_sig_neg.txt --col1 Site --order1 control vent >pH_sig_neg.plot.txt
+```
+**accomplish by connecting the above codes**  
+Results: geneInfo_pH_sig_pos_plot.txt, geneInfo_pH_sig_neg_plot.txt
+```bash
+prep_exp_wgcna_plot --wgcna Blenny_matrix_wgcna.xls --trait geneInfo_pH_sig.txt --sample coldata_Blenny.txt
+```
