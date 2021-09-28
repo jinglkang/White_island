@@ -68,5 +68,8 @@ nohup ~/software/EVE_release/EVEmodel -O -o 2 -n 15908 -t 1_Tree.newick -i 2_Nin
 nohup ~/software/EVE_release/EVEmodel -O -o 3 -n 15908 -t 1_Tree.newick -i 2_Nindivs.indiv -d 3_sampleExpr.dat -f _Yaldwyn -v 50 > Yaldwyn_eve.process.txt 2>&1 &
 nohup ~/software/EVE_release/EVEmodel -O -o 4 -n 15908 -t 1_Tree.newick -i 2_Nindivs.indiv -d 3_sampleExpr.dat -f _Blue_eyed -v 50 > Blue_eve.process.txt 2>&1 &
 ```
-
+# RUN eve module on all inds
+```bash
+nohup ~/software/EVE_release/EVEmodel -S -n 15908 -t 1_Tree.newick -i 2_Nindivs.indiv -d 3_sampleExpr.dat -f _EVE -v 50 > EVE.process.txt 2>&1 &
+```
 
