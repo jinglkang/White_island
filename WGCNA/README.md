@@ -87,3 +87,8 @@ no sig. gene in any sig. module related to pH
 ***
 ## Blue eyed
 working dir: /media/HDD/white_island/wgcna/Blue   
+|**Trait**|**module nb**|**gene nb**|
+|:---:|:---:|:---:|
+|pH|module_nb(6)|gene_nb(150)|
+|Length|module_nb(16)|gene_nb(524)|
+|Salinity|module_nb(17)|gene_nb(1195)|
