@@ -55,3 +55,5 @@ output files: geneInfo_Length_sig.txt, geneInfo_pH_sig.txt, geneInfo_Salinity_si
 |pH|module_nb(15)|gene_nb(144)|
 |Length|module_nb(43)|gene_nb(948)|
 |Salinity|module_nb(2)|gene_nb(24)|
+### transform the expression data to ratio, and plot these gene expression data according to positive or negative correlated
+
