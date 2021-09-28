@@ -33,7 +33,7 @@ The matrix of normalized reads nb and trait data: Blenny_matrix_wgcna.xls; colda
 |:---:|:---:|
 |dynamicColors.csv|gene nb in each color modules|
 |textMatrix_1.csv|the correlation bettwen trait and module|
-### Check the sig. modules per trait
+### Check the sig. modules and genes in each sig. modules per trait
 ```bash
 sig_module >sig_module.txt
 ```
@@ -43,4 +43,15 @@ out the code and run the code in R console
 code_trait_gene_cor --traits pH Salinity Length
 ```
 **Result**: geneInfo_Length.csv; geneInfo_pH.csv; geneInfo_Salinity.csv.  
-
+### Based on "sig_module.txt" to extract the sig. genes in sig. correlated modules
+working dir: /media/HDD/white_island/wgcna/Blenny    
+**Notice**: the "sig_module.txt" should be the current working dir  
+```bash
+sig_module_trait --traits geneInfo_pH.csv geneInfo_Length.csv geneInfo_Salinity.csv
+```
+output files: geneInfo_Length_sig.txt (2137 genes), geneInfo_pH_sig.txt (341 genes), geneInfo_Salinity_sig.txt (55 genes);
+|**Trait**|**module nb**|**gene nb**|
+|:---:|:---:|:---:|
+|pH|module_nb(15)|gene_nb(341)|
+|Length|module_nb(43)|gene_nb(2137)|
+|Salinity|module_nb(2)|gene_nb(55)|
