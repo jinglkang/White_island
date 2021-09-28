@@ -86,3 +86,4 @@ no sig. gene in any sig. module related to pH
 |Salinity|module_nb(5)|gene_nb(183)|
 ***
 ## Blue eyed
+working dir: /media/HDD/white_island/wgcna/Blue   
