@@ -7,7 +7,6 @@ library(DEGreport)
 show_col(pal_aaas("default", alpha = 1)(10))
 setwd("~/Documents/2021/White_island/WGCNA/Common/")
 dat1<-read.table("geneInfo_pH_sig_pos_plot.txt",header=TRUE)
-dat1 <- na.omit(dat1)
 names(dat1)
 ggplot(dat1,aes(pH,Nb)) +
   geom_boxplot(aes(group=pH,colour=Site), coef = 6, outlier.shape=NA) +
