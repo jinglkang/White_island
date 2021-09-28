@@ -1,0 +1,91 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Getopt::Long 'HelpMessage';
+
+my $usage=<<_EOH_;;
+------------------------------------------------------------------------------------------
+This script is to print the sig. genes (p < 0.05) in each sig. module (p < 0.05) 
+(abs(cor.)>=0.6) for the plot
+
+Usage: 
+prep_exp_wgcna_plot --wgcna Blenny_matrix_wgcna.xls --trait geneInfo_pH_sig.txt --sample coldata_Blenny.txt
+
+Input files:
+
+1. --wgcna Blenny_matrix_wgcna.xls # the wgnca input expression data
+
+	Blenny_Cn_1	Blenny_Cn_2	Blenny_Cs_1	Blenny_Cs_2	Blenny_Cs_3	Blenny_Cs_4
+OG0032981	8.342	8.420	8.466	7.999	8.547	8.738
+
+2. --trait geneInfo_pH_sig.txt
+
+	moduleColor	GS.pH	pH	MM.deeppink	p.MM.deeppink	MM.coral	p.MM.coral	MM.orangered	p.MM.orangered
+OG0070303	antiquewhite2	0.700599463430282	0.00173375525260275	0.25486271763999	0.323537106255039
+
+3. --sample coldata_Blenny.txt
+
+	Site	pH	Salinity	Length
+Blenny_Cs_4	control	8.05	32.9	4.5
+Blenny_Cs_5	control	8.03	34	5.8
+Blenny_Vn_1	vent	7.49	32.9	4.6
+Blenny_Vn_2	vent	7.97	33.6	4
+
+											Kang 2021-09-27
+------------------------------------------------------------------------------------------
+_EOH_
+;
+
+
+GetOptions(
+	'wgcna:s', \my $wgcna,	# the wgnca input expression data
+	'trait:s', \my $trait,	# the sig. trait file
+	'sample:s', \my $sample,	# sample info
+	'help', \ my $help
+	);
+
+if ($help || (! $trait) || (! $wgcna) || (! $sample) ) {
+	die $usage; # all of these options are mandatory requirements
+}
+
+tranform_expression_ratio($wgcna);
+(my $name) = $trait =~ /(.*)\.txt/;
+my $pos = $name."_pos.txt";
+my $neg = $name."_neg.txt";
+system("less $trait|perl -alne 'next if /^\\s+/;print \$F[0] if \$F[2]>0' >$pos");
+system("less $trait|perl -alne 'next if /^\\s+/;print \$F[0] if \$F[2]<0' >$neg");
+my $pos_p=$name."_pos_plot.txt";
+my $neg_p=$name."_neg_plot.txt";
+system("extract_gene_expression_plot --matrix expression_ratio.txt --sample $sample --gene $pos --col1 Site --order1 control vent >$pos_p");
+system("extract_gene_expression_plot --matrix expression_ratio.txt --sample $sample --gene $neg --col1 Site --order1 control vent >$neg_p");
+system("rm $pos $neg expression_ratio\.txt");
+
+# transform the matrix to ratio matrix
+sub tranform_expression_ratio {
+	my ($matrix) = @_;
+	open MAT, "$matrix" or die "can not open $matrix\n";
+	my $file="expression_ratio.txt";
+	open NEW, ">$file" or die "can not create $file\n";
+	while (<MAT>) {
+		chomp;
+		my @a=split /\t/;
+		if (/^\s+/) {
+			print NEW "$_\n";
+		} else {
+			my $sum;
+			for (my $i = 1; $i < @a; $i++) {
+				$sum+=$a[$i];
+			}
+			my $info;
+			for (my $i = 1; $i < @a; $i++) {
+				my $ratio=$a[$i]/$sum;
+				$ratio=sprintf("%.3f",$ratio);
+				$info.=$ratio."\t";
+			}
+			$info=~s/\s+$//;
+			print NEW "$a[0]\t$info\n";
+		}
+	}
+	close MAT;
+	close NEW;
+}
