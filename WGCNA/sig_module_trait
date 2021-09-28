@@ -97,8 +97,8 @@ foreach my $trait (@traits) {
 		$info2=~s/\s+$//;
 		my @b=split /\t/, $info1;
 		foreach my $modu (@modules) {
-				print NEW "$gene\t$info1\t$info2\n" if $modu eq $b[0] && $b[-1]<=0.05;
-				$num2++ if $modu eq $b[0] && $b[-1]<=0.05;
+				print NEW "$gene\t$info1\t$info2\n" if $modu eq $b[0] && $b[-1]<=0.05 && abs($b[1])>=0.6;
+				$num2++ if $modu eq $b[0] && $b[-1]<=0.05 && abs($b[1])>=0.6;
 		}
 	}
 	print "$name\tmodule_nb($num1)\tgene_nb($num2)\n";
