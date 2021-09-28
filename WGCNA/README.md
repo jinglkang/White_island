@@ -68,3 +68,5 @@ Results: geneInfo_pH_sig_pos_plot.txt, geneInfo_pH_sig_neg_plot.txt
 ```bash
 prep_exp_wgcna_plot --wgcna Blenny_matrix_wgcna.xls --trait geneInfo_pH_sig.txt --sample coldata_Blenny.txt
 ```
+***
+## Common
