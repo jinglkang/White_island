@@ -7,7 +7,8 @@ my $usage=<<_EOH_;;
 ------------------------------------------------------------------------------------------
 This script is to print the correlation between genes and traits in sig module.
 The input could be multiple trait files or single;
-The output is the sig. genes (p < 0.05) in each sig. module (p < 0.05).
+The output is the sig. genes (p < 0.05) in each sig. module (p < 0.05); 
+And the cor. should be >=0.6 or <=-0.6.
 
 Usage: 
 sig_module_trait --traits geneInfo_pH.csv geneInfo_Length.csv geneInfo_Salinity.csv
