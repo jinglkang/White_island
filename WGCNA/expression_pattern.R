@@ -10,6 +10,7 @@ dat1<-read.table("geneInfo_pH_sig_pos_plot.txt",header=TRUE)
 names(dat1)
 ggplot(dat1,aes(pH,Nb)) +
 #  geom_point(aes(colour=Site),size=1) + 
+#  geom_jitter(aes(colour=Site),size=1,width = 0.0018) +
   geom_boxplot(aes(group=pH,colour=Site))+
 #  stat_summary(fun=median, geom="line", aes(group=1))+
 #  geom_line(aes(colour=Site)) +
