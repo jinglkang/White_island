@@ -38,7 +38,7 @@ The matrix of normalized reads nb and trait data: Blenny_matrix_wgcna.xls; colda
 sig_module >sig_module.txt
 ```
 ### Save the correlation info. between trait and module per gene
-out the code and run the code in R console
+out the code and run the code in R console (gene_module_cor.R)
 ```bash
 code_trait_gene_cor --traits pH Salinity Length
 ```
