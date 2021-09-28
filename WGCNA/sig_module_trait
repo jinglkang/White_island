@@ -1,0 +1,106 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Getopt::Long 'HelpMessage';
+
+my $usage=<<_EOH_;;
+------------------------------------------------------------------------------------------
+This script is to print the correlation between genes and traits in sig module.
+The input could be multiple trait files or single;
+The output is the sig. genes (p < 0.05) in each sig. module (p < 0.05).
+
+Usage: 
+sig_module_trait --traits geneInfo_pH.csv geneInfo_Length.csv geneInfo_Salinity.csv
+
+Input files:
+
+1. --traits geneInfo_pH.csv
+
+											Kang 2021-09-27
+------------------------------------------------------------------------------------------
+_EOH_
+;
+
+
+GetOptions(
+	'traits:s{1,}', \my @traits,	# the trait files
+	'help', \ my $help
+	);
+
+if ($help || (! @traits)) {
+	die $usage; # all of these options are mandatory requirements
+}
+
+my @header1;
+my %hash1;
+
+open SIG, "sig_module.txt" or die "can not open sig_module.txt\n";
+while (<SIG>) {
+	chomp;
+	s/^ME//;
+	my @a=split /\t/;
+	if (/^\s+/) {
+		@header1=split /\t/;
+	} else {
+		for (my $i = 1; $i < @a-1; $i++) {
+			push @{$hash1{$header1[$i]}}, $a[0] if $a[$i]=~/\(/;
+		}
+	}
+}
+
+foreach my $trait (@traits) {
+	my $header3;
+	my (@header2, @genes);
+	my %hash2;
+	open TRAIT, "$trait" or die "can not open $trait\n";
+	(my $name)=$trait=~/geneInfo\_(.*)\.csv/;
+	my $new_file="geneInfo_".$name."_sig.txt";
+	open NEW, ">$new_file" or die "can not create $new_file";
+	while (<TRAIT>) {
+		chomp;
+		s/"//g;
+		my @a=split /,/;
+		if (/^,/) {
+			@header2=@a;
+		} else {
+			for (my $i = 4; $i < @a; $i=$i+2) {
+				my $info=$a[1]."\t".$a[2]."\t".$a[3];
+				(my $module)=$header2[$i]=~/MM\.(.*)/;
+				$hash2{$module}->{$a[0]} = {
+					info => $info,
+					mm => $a[$i],
+					pmm => $a[$i+1]
+				};
+			}
+			push @genes, $a[0];
+		}
+	}
+	$header3=$header2[0]."\t".$header2[1]."\t".$header2[2]."\t".$header2[3]."\t";
+	my @modules = @{$hash1{$name}};
+	my $num1=@modules;
+	foreach my $modu (@modules) {
+		my $mm="MM.".$modu;
+		my $pmm="p.MM.".$modu;
+		$header3.=$mm."\t".$pmm."\t";
+	}
+	$header3=~s/\s+$//;
+	print NEW "$header3\n";
+	my $num2;
+	foreach my $gene (@genes) {
+		my ($info1, $info2);
+		foreach my $modu (@modules) {
+			$info1=$hash2{$modu}->{$gene}->{'info'};
+			my $mm=$hash2{$modu}->{$gene}->{'mm'};
+			my $pmm=$hash2{$modu}->{$gene}->{'pmm'};
+			$info2.=$mm."\t".$pmm."\t";
+		}
+		$info2=~s/\s+$//;
+		my @b=split /\t/, $info1;
+		foreach my $modu (@modules) {
+				print NEW "$gene\t$info1\t$info2\n" if $modu eq $b[0] && $b[-1]<=0.05;
+				$num2++ if $modu eq $b[0] && $b[-1]<=0.05;
+		}
+	}
+	print "$name\tmodule_nb($num1)\tgene_nb($num2)\n";
+	close NEW;
+}
