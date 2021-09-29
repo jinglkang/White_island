@@ -2,8 +2,6 @@ library(ggplot2)
 library(gridExtra)
 library(ggsci)
 library("scales")
-library(SummarizedExperiment)
-library(DEGreport)
 show_col(pal_aaas("default", alpha = 1)(10))
 
 ################################################### 
