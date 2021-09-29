@@ -98,5 +98,6 @@ working dir: /media/HDD/white_island/wgcna/Blue
 expression_pattern_Blenny.R;   
 expression_pattern_Blue_eyed.R;   
 expression_pattern_Common.R;   
-expression_pattern_Yaldwyn.R;   
+expression_pattern_Yaldwyn.R;  
+**Assemble these Figures**: plot_expression_pattern_one_figure.R  
 
