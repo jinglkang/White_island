@@ -92,3 +92,6 @@ working dir: /media/HDD/white_island/wgcna/Blue
 |pH|module_nb(6)|gene_nb(150)|
 |Length|module_nb(16)|gene_nb(524)|
 |Salinity|module_nb(17)|gene_nb(1195)|
+***
+## Assemble all expression pattern in one Figure
+
