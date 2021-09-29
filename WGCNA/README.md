@@ -94,4 +94,9 @@ working dir: /media/HDD/white_island/wgcna/Blue
 |Salinity|module_nb(17)|gene_nb(1195)|
 ***
 ## Assemble all expression pattern in one Figure
+## plot expression pattern between trait (pH, length, Salinity) and gene expression in each species
+expression_pattern_Blenny.R;   
+expression_pattern_Blue_eyed.R;   
+expression_pattern_Common.R;   
+expression_pattern_Yaldwyn.R;   
 
