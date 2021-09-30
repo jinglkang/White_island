@@ -106,3 +106,16 @@ example: ~/Documents/2021/White_island/WGCNA/Blenny
 ```bash
 extract_anno_trait --traits pH Length Salinity
 ```
+~/Documents/2021/White_island/WGCNA/Blue  
+```bash
+extract_anno_trait --traits pH Length Salinity
+```
+~/Documents/2021/White_island/WGCNA/Common  
+```bash
+extract_anno_trait --traits pH Length Salinity
+```
+~/Documents/2021/White_island/WGCNA/Yaldwyn
+```bash
+extract_anno_trait --traits Length Salinity
+```
+***
