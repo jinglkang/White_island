@@ -1,0 +1,54 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Getopt::Long 'HelpMessage';
+
+my $usage=<<_EOH_;;
+----------------------------------------------------------
+Extract genes from geneInfo_*_sig_*_plot.txt and anotation
+
+Usage: 
+extract_anno_trait --traits pH Length Salinity
+
+										Kang 2021-09-30
+----------------------------------------------------------
+_EOH_
+;
+
+GetOptions(
+	'traits:s{1,}', \my @traits,	# the traits
+	'help', \ my $help
+	);
+
+if ($help || (! @traits)) {
+	die $usage;
+}
+
+my $anodir="~/Documents/2021/White_island/reads_number_matrix";
+my $ano=$anodir."/unprot_name_description_orthgroup.txt";
+
+Extract();
+
+########
+sub Extract {
+	foreach my $trait (@traits) {
+		my $p="_sig_pos_plot.txt";
+		my $n="_sig_neg_plot.txt";
+		my $t_p="geneInfo_".$trait.$p;
+		die "No $t_p\n" if ! -e $t_p;
+		my $t_p_g=$trait."_sig_pos_gene.txt";
+		my $t_n="geneInfo_".$trait.$n;
+		die "No $t_n\n" if ! -e $t_n;
+		my $t_n_g=$trait."_sig_neg_gene.txt";
+		my $total=$trait."_sig_gene.txt";
+		system("less $t_p|perl -alne 'print \$F[0] if /^OG/'|sort -u >$t_p_g");
+#		print "less $t_p|perl -alne 'print \$F[0] if /^OG/'|sort -u >$t_p_g\n";
+		system("less $t_n|perl -alne 'print \$F[0] if /^OG/'|sort -u >$t_n_g");
+#		print "less $t_n|perl -alne 'print \$F[0] if /^OG/'|sort -u >$t_n_g\n";
+		system("cat $t_p_g $t_n_g > $total");
+#		print "cat $t_p_g $t_n_g > $total\n";
+		my $total_ano=$trait."_sig_gene_ano.txt";
+		system("extract_anno --genes $total --anno $ano --col 1 > $total_ano");
+#		print "extract_anno --genes $total --anno $ano --col 1 > $total_ano\n";
+	}
+}
