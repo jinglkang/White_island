@@ -100,4 +100,9 @@ expression_pattern_Blue_eyed.R;
 expression_pattern_Common.R;   
 expression_pattern_Yaldwyn.R;  
 **Assemble these Figures**: plot_expression_pattern_one_figure.R  
-
+***
+## Annotate genes related to each trait
+example: ~/Documents/2021/White_island/WGCNA/Blenny    
+```bash
+extract_anno_trait --traits pH Length Salinity
+```
