@@ -78,4 +78,11 @@ working dir: /media/HDD/white_island/EVE_module
 ```bash
 less White_island.TPM.TMM.sqrt.rename.filtered.matrix|perl -alne 'print $F[0] if /^OG/' >allgenes_names.txt
 ```
-run EVEresults.R    
+run EVEresults.R (FDR<=0.05)    
+|**Species**|**diverge genes nb**|**diverse genes nb**|
+|:---:|:---:|:---:|
+|Blenny|760|67|
+|Blue eyed|872|37|
+|Common|193|85|
+|Yaldwyn|258|85|
+|all inds|206|5|
