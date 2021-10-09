@@ -120,4 +120,25 @@ extract_anno_trait --traits Length Salinity
 ```
 ***
 # Change sig_module_trait (the correlation >=0.8 or <=-0.8) and run again
-
+|**Species**|**Trait**|**module nb**|**gene nb**|
+|:---:|:---:|:---:|:---:|
+|Blenny|pH|module_nb(15)|gene_nb(10)|
+|Blenny|Length|module_nb(43)|gene_nb(28)|
+|Blenny|Salinity|module_nb(2)|gene_nb(1)|
+***
+|**Species**|**Trait**|**module nb**|**gene nb**|
+|:---:|:---:|:---:|:---:|
+|Blue eyed|pH|module_nb(6)|gene_nb(55)|
+|Blue eyed|Length|module_nb(16)|gene_nb(135)|
+|Blue eyed|Salinity|module_nb(17)|gene_nb(229)|
+***
+|**Species**|**Trait**|**module nb**|**gene nb**|
+|:---:|:---:|:---:|:---:|
+|Common|pH|module_nb(20)|gene_nb(164)|
+|Common|Length|module_nb(27)|gene_nb(357)|
+|Common|Salinity|module_nb(6)|gene_nb(31)|
+***
+|**Species**|**Trait**|**module nb**|**gene nb**|
+|:---:|:---:|:---:|:---:|
+|Yaldwyn|Length|module_nb(44)|gene_nb(16)|
+|Yaldwyn|Salinity|module_nb(5)|gene_nb(4)|
