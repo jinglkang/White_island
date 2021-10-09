@@ -72,4 +72,10 @@ nohup ~/software/EVE_release/EVEmodel -O -o 4 -n 15908 -t 1_Tree.newick -i 2_Nin
 ```bash
 nohup ~/software/EVE_release/EVEmodel -S -n 15908 -t 1_Tree.newick -i 2_Nindivs.indiv -d 3_sampleExpr.dat -f _EVE -v 50 > EVE.process.txt 2>&1 &
 ```
-
+***
+# Estimate diverge and diverse gene of each species
+working dir: /media/HDD/white_island/EVE_module     
+```bash
+less White_island.TPM.TMM.sqrt.rename.filtered.matrix|perl -alne 'print $F[0] if /^OG/' >allgenes_names.txt
+```
+run EVEresults.R    
