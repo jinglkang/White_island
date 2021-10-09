@@ -142,3 +142,4 @@ extract_anno_trait --traits Length Salinity
 |:---:|:---:|:---:|:---:|
 |Yaldwyn|Length|module_nb(44)|gene_nb(16)|
 |Yaldwyn|Salinity|module_nb(5)|gene_nb(4)|
+***
