@@ -119,4 +119,5 @@ extract_anno_trait --traits pH Length Salinity
 extract_anno_trait --traits Length Salinity
 ```
 ***
-# Change sig_module_trait (the correlation >=0.8 or <=-0.8)
+# Change sig_module_trait (the correlation >=0.8 or <=-0.8) and run again
+
