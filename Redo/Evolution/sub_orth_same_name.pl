@@ -120,9 +120,9 @@ while (<SEQ>) {
 					$info3=~s/\,$//;
 					$info2.=$info3."\t";
 				}
-				$info1.="$name";
+				$info1.=$name;
 				print MATRIX "$info1\n";
-				$info2.=$info2."\t$name";
+				$info2.=$name;
 				print MATRID "$info2\n";
 			}
 		}
