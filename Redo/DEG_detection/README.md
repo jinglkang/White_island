@@ -114,7 +114,7 @@ extract_gene_functions -i *_enrichment.txt -a unprot_name_description_orthgroup.
 extract_gene_functions -i *_enrichment.txt -a unprot_name_description_orthgroup.txt --gene_column 1 --func_column 3 --functions CR_funcs.txt --output CR_DEGs
 # up or down? which comparison
 # kangjingliang@kangjingliangdeMacBook-Pro 五  3 24 06:24:57 ~/Documents/2023/WI/DEGs/Enrichment
-perl Add_regu_info.pl CR_DEGs.txt
+perl Add_regu_info.pl CR_DEGs.txt > CR_DEGs_regulation.txt
 ```
 
 ```perl
