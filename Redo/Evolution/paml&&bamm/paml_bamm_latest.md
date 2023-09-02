@@ -1383,3 +1383,30 @@ perl temp1.pl > Fq_nm_change.txt
 perl temp2.pl > final_nm_fq.txt
 perl temp3.pl >filtering_info_final.txt # filtering information needed
 ```
+## Compare the evolutionary rate
+### 1. aggressive behavior
+```bash
+# kangjingliang@kangjingliangdeMacBook-Pro 六  9 02 15:58:08 ~/Documents/2023/WI/DEGs/Enrichment
+less Common_enrichment_ref_test.txt|perl -alne '@a=split /\t/;print if $a[2] eq "aggressive behavior"'|perl -alne 'my @a=split /\;/, $F[-2];foreach my $a (@a){print $a};my @b=split /\;/, $F[-1];foreach my $b (@b){print $b}' > aggressive_behavior_genes.txt
+extract_anno --genes aggressive_behavior_genes.txt --anno unprot_name_description_orthgroup.txt --col 1 > aggressive_behavior_genes_anno.txt
+# kangjingliang@kangjingliangdeMacBook-Pro 六  9 02 16:34:06 ~/Documents/2023/WI/DEGs/Enrichment
+less aggressive_behavior_genes_anno.txt|perl -alne '(my $nm)=$F[1]=~/sp\|.*\|(.*)\_/;print $nm'|sort -u|less
+# copy names to bamm_genes_plot.txt
+# Kang@fishlab3 Sat Sep 02 16:32:16 /media/HDD/white_island/Compevo/Orth_ten_CO2/bamm_WI
+rm bamm_genes_plot.txt; vi bamm_genes_plot.txt
+perl temp3.pl
+sh run_bamm.sh
+
+grep 'Vasopressin V1b receptor' aggressive_behavior_genes_anno.txt
+# OG0058684	sp|P47901|V1BR_HUMAN	Vasopressin V1b receptor
+grep 'Substance-P receptor' aggressive_behavior_genes_anno.txt
+# OG0089860	sp|Q5DUB1|NK1R_MERUN	Substance-P receptor
+# OG0056231	sp|Q5DUB1|NK1R_MERUN	Substance-P receptor
+vi bamm_genes_plot.txt # V1BR; NK1R
+perl temp3.pl
+sh run_bamm.sh
+
+# kangjingliang@kangjingliangdeMacBook-Pro 六  9 02 17:25:08 ~/Documents/2023/WI/bamm_WI/Aggressive_behavior
+scp -r Kang@147.8.76.229:/media/HDD/white_island/Compevo/Orth_ten_CO2/bamm_WI/*_trait ./
+rm -rf OG0012851_trait
+```
