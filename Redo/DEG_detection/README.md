@@ -167,3 +167,10 @@ while (<ENRI>) {
 	}
 }
 ```
+
+## For some interesting functions
+```bash
+# kangjingliang@kangjingliangdeMacBook-Pro 日  9 03 15:58:02 ~/Documents/2023/WI/DEGs/Enrichment
+extract_gene_functions -i Common_enrichment.txt -a unprot_name_description_orthgroup.txt --gene_column 1 --func_column 3 --functions interesting_func.txt --output Interesting_func_genes
+less Interesting_func_genes.txt
+```
