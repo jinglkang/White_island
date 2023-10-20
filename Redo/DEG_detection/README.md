@@ -174,3 +174,135 @@ while (<ENRI>) {
 extract_gene_functions -i Common_enrichment.txt -a unprot_name_description_orthgroup.txt --gene_column 1 --func_column 3 --functions interesting_func.txt --output Interesting_func_genes
 less Interesting_func_genes.txt
 ```
+## Investigate the specific DEGs in Common triplefin
+```temp7.pl
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+my %FUNC;
+my @spes =qw(Common Blueeyed Yaldwin Blenny);
+my @funcs=("behavioral fear response","aggressive behavior","larval feeding behavior","growth hormone secretion","glycogen biosynthetic process","regulation of glucose metabolic process","courtship behavior");
+extract_info("Blenny", "Blenny_enrichment.txt");
+extract_info("Blueeyed", "Blueeyed_enrichment.txt");
+extract_info("Common", "Common_enrichment.txt");
+extract_info("Yaldwin", "Yaldwyn_enrichment.txt");
+foreach my $fun (@funcs) {
+	foreach my $spe (@spes) {
+		my ($num, $fdr);
+		if ($FUNC{$spe}->{$fun}) {
+			$num=$FUNC{$spe}->{$fun}->{'NUM'};
+			$fdr=$FUNC{$spe}->{$fun}->{'FDR'};
+		} else {
+			$num=0;
+			$fdr=1;
+		}
+		print "$fun\t$spe\t$num\t$fdr\n";
+	}
+}
+
+sub extract_info {
+	my ($spe, $enrich)=@_;
+	open ENRICH, $enrich or die "can not open $enrich\n";
+	while (<ENRICH>) {
+		chomp;
+		next if /^Tags/;
+		my @a=split /\t/;
+		my ($name, $fdr, $num)=($a[2], $a[4], $a[6]);
+		$FUNC{$spe}->{$name}={
+			FDR => $fdr,
+			NUM => $num
+		};
+	}
+}
+```
+```bash
+# kangjingliang@kangjingliangdeMacBook-Pro 一  9 04 10:35:31 ~/Documents/2023/WI/DEGs/Enrichment
+perl temp7.pl > Interesting_func_compare.txt
+# check the DEGs of each species underlying these interesting functions
+extract_gene_functions -i *_enrichment.txt -a unprot_name_description_orthgroup.txt --gene_column 1 --func_column 3 --functions Interesting_func_plot.txt --output Interesting_func_plot_DEGs
+# rank the genes according to the functions
+perl temp8.pl > Interesting_func_plot_DEGs_summany.txt
+
+# make a heatmap of ion channel and glutamate receptors genes for all the four species
+# Blenny
+# kangjingliang@kangjingliangdeMacBook-Pro 一  9 04 16:43:09 ~/Documents/2023/WI/DEGs/Blenny
+vi ion_glutamate_DEGs.txt
+extract_reads_nb --matrix ../White_island.TPM.TMM.sqrt.rename.matrix --genes ion_glutamate_DEGs.txt --samples coldata_blenny_remove_Cn.txt >Blenny_ion_glutamate_DEGs_norm.txt
+
+# Blueeyed
+cd ../Blueeyed
+# kangjingliang@kangjingliangdeMacBook-Pro 一  9 04 16:54:13 ~/Documents/2023/WI/DEGs/Blueeyed
+cp ../Blenny/ion_glutamate_DEGs.txt ./
+extract_reads_nb --matrix ../White_island.TPM.TMM.sqrt.rename.matrix --genes ion_glutamate_DEGs.txt --samples coldata_blueeyed_remove_Cn.txt >Blueeyed_ion_glutamate_DEGs_norm.txt
+
+# Common
+# kangjingliang@kangjingliangdeMacBook-Pro 一  9 04 16:58:58 ~/Documents/2023/WI/DEGs/Common
+cp ../Blenny/ion_glutamate_DEGs.txt ./
+extract_reads_nb --matrix ../White_island.TPM.TMM.sqrt.rename.matrix --genes ion_glutamate_DEGs.txt --samples coldata_Common_remove_Cn.txt >Common_ion_glutamate_DEGs_norm.txt
+
+# Yaldwyn
+cd ../Yaldwyn
+# kangjingliang@kangjingliangdeMacBook-Pro 一  9 04 17:17:18 ~/Documents/2023/WI/DEGs/Yaldwyn
+cp ../Blenny/ion_glutamate_DEGs.txt ./
+extract_reads_nb --matrix ../White_island.TPM.TMM.sqrt.rename.matrix --genes ion_glutamate_DEGs.txt --samples coldata_Yaldwyn_remove_Cn.txt >Yaldwyn_ion_glutamate_DEGs_norm.txt
+
+# make a whole heatmap based on all species
+# kangjingliang@kangjingliangdeMacBook-Pro 一  9 04 20:41:23 ~/Documents/2023/WI/DEGs/Common
+cat coldata_Common_remove_Cn.txt ../Blueeyed/coldata_blueeyed_remove_Cn.txt ../Yaldwyn/coldata_Yaldwyn_remove_Cn.txt ../Blenny/coldata_blenny_remove_Cn.txt > coldata_all_spe__remove_Cn.txt
+less coldata_all_spe__remove_Cn.txt|perl -alne 's/\r//g;print' > coldata_all_spe__remove_Cn.txt.1
+mv coldata_all_spe__remove_Cn.txt.1 coldata_all_spe__remove_Cn.txt
+mv coldata_all_spe__remove_Cn.txt coldata_all_spe_remove_Cn.txt
+extract_reads_nb --matrix ../White_island.TPM.TMM.sqrt.rename.matrix --genes ion_glutamate_DEGs.txt --samples coldata_all_spe_remove_Cn.txt >Allspe_ion_glutamate_DEGs_norm.txt
+
+# Compare the big functions
+# kangjingliang@kangjingliangdeMacBook-Pro 二  9 05 22:07:06 ~/Documents/2023/WI/DEGs/Enrichment
+perl temp9.pl > Interesting_Bigfunc_compare.txt
+
+# Combine both the big and specific functions
+# kangjingliang@kangjingliangdeMacBook-Pro 二  9 05 22:27:13 ~/Documents/2023/WI/DEGs/Enrichment
+cat Interesting_Bigfunc_compare.txt Interesting_func_compare.txt > Interesting_Totalfunc_compare.txt
+vi Interesting_Totalfunc_compare.txt # remove "response to stress"
+
+# ComplexUpset: display the overlapped genes between functions
+# kangjingliang@kangjingliangdeMacBook-Pro 三  9 13 02:00:07 ~/Documents/2023/WI/DEGs/Enrichment
+perl temp10.pl > ComplexUpset_input.txt
+
+```
+
+## Common genes in at least two spcies
+```bash
+# kangjingliang@kangjingliangdeMacBook-Pro 日  9 10 15:36:51 ~/Documents/2023/WI/WI_enric
+# CR
+cp ~/Documents/2023/WI/DEGs/Enrichment/unprot_name_description_orthgroup.txt ./
+extract_gene_functions -i Common2spe_DEG_reduce_enrichment.txt -a unprot_name_description_orthgroup.txt --gene_column 1 --func_column 3 --functions Common2spe_CR_funcs.txt --output Common2spe_CRfunc_DEGs
+perl ../DEGs/Enrichment/temp2.pl Common2spe_CRfunc_DEGs.txt > Common2spe_CRfunc_DEGs_info.txt
+
+# Vision
+extract_gene_functions -i Common2spe_DEG_reduce_enrichment.txt -a unprot_name_description_orthgroup.txt --gene_column 1 --func_column 3 --functions Common2spe_Vision_funcs.txt --output Common2spe_Visionfunc_DEGs
+perl ../DEGs/Enrichment/temp2.pl Common2spe_Visionfunc_DEGs.txt > Common2spe_Visionfunc_DEGs_info.txt
+
+# plot the intersection by ComplexUpset
+
+# kangjingliang@kangjingliangdeMacBook-Pro 三  9 13 10:56:38 ~/Documents/2023/WI/DEGs/Enrichment
+vi Interesting_func_plot_Final.txt
+extract_gene_functions -i *_enrichment.txt -a unprot_name_description_orthgroup.txt --gene_column 1 --func_column 3 --functions Interesting_func_plot_Final.txt --output Interesting_func_plot_Final_DEGs
+perl temp8.pl > Interesting_func_plot_Final_DEGs_summany.txt
+```
+
+## Check the DEGs underlying KEGG pathway
+```bash
+# kangjingliang@kangjingliangdeMacBook-Pro 四  9 14 11:47:16 ~/Documents/2023/WI/DEGs/Enrichment/Common_KEGG
+perl extract_gene_kegg_pathway_2.pl genedata.hsa04713.tsv > Circadian_entrainment_common.txt
+# 131 DEGs of the common triplefin involved in Circadian entrainment
+
+# kangjingliang@kangjingliangdeMacBook-Pro 四  9 14 11:56:00 ~/Documents/2023/WI/DEGs/Enrichment/Blenny_KEGG
+perl extract_gene_kegg_pathway_2.pl genedata.hsa04713.tsv > Circadian_entrainment_blenny.txt
+# 23 DEGs of the crest blenny involved in Circadian entrainment
+
+# None in the blue-eyed triplefin
+
+# kangjingliang@kangjingliangdeMacBook-Pro 四  9 14 12:01:55 ~/Documents/2023/WI/DEGs/Enrichment/Yaldwyn_KEGG
+perl extract_gene_kegg_pathway_2.pl genedata.hsa04713.tsv > Circadian_entrainment_Yaldwin.txt
+# 21 DEGs of the crest blenny involved in Circadian entrainment
+```
