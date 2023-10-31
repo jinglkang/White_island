@@ -116,6 +116,7 @@ extract_gene_functions -i *_enrichment.txt -a unprot_name_description_orthgroup.
 # kangjingliang@kangjingliangdeMacBook-Pro 五  3 24 06:24:57 ~/Documents/2023/WI/DEGs/Enrichment
 perl Add_regu_info.pl CR_DEGs.txt > CR_DEGs_regulation.txt
 perl Add_regu_info_new.pl pH_DEGs_table.txt > pH_DEGs_table_regu.txt
+perl Add_regu_info_new.pl Interesting_func_plot_Final_DEGs_table.txt > Interesting_func_plot_Final_DEGs_table_regu.txt
 ```
 
 ```perl
