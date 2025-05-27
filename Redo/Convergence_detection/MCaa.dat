@@ -1,0 +1,17 @@
+ 0           * 0: paml format (mc.paml); 1:paup format (mc.nex)
+13147        * random number seed (odd number)
+
+16 646 1000  * <# seqs>  <# sites>  <# replicates>
+
+-1           * <tree length, use -1 if tree below has absolute branch lengths>
+
+(((Ocomp: 0.387232, ((Stickleback: 0.178151, Fugu: 0.302299): 0.012656, (((Daru: 0.286117, ((Acura: 0.185769, Apoly: 0.530571): 0.000004, (Pmol: 0.004223, Padel: 0.009603): 0.249941): 0.014376): 0.000004, (Blenny: 0.119831, ((Yaldwyn: 0.207710, Blueeyed: 0.546447): 0.034464, Common: 0.236088): 0.007761): 0.047420): 0.000004, (Platyfish: 0.115291, Medaka: 0.139867): 0.443068): 0.000004): 0.158934): 0.000004, Zebrafish: 0.353532): 0.147484, Spottedgar: 0.131182);
+
+.42248 3     * <alpha; see notes below>  <#categories for discrete gamma>
+2 /home/jlkang/software/paml/dat/jones.dat * <model> [aa substitution rate file, need only if model=2 or 3]
+
+0.05940 0.05592 0.04209 0.07285 0.02196 0.03589 0.07672 0.07624 0.02051 0.05012 0.08969 0.05128 0.01964 0.06153 0.03038 0.07837 0.04992
+ 0.02138 0.02486 0.06124
+A R N D C Q E G H I L K M F P S T W Y V
+
+// end of file
